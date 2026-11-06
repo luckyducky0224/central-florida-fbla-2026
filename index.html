@@ -1,0 +1,829 @@
+<!DOCTYPE html> 
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Central Florida Navbar</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f3ed;
+    }
+
+    /* Navigation bar */
+    .navbar {
+      background-color: #294d43;
+      padding: 16px 35px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Website title */
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    /* Navigation links */
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #d9b89c;
+    }
+
+    /* Mobile layout */
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .nav-links {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+
+    <a href="index.html" class="logo">
+      Central Florida
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="map.html">Map</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="cities.html">Cities</a></li>
+    </ul>
+
+  </nav>
+
+
+
+<html lang="en"> 
+
+<head> 
+
+  <meta charset="UTF-8"> 
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+  <title>Explore Central Florida</title> 
+
+<h1 style="color: lightblue;">Paradise in the Sun</h1>   
+
+ <h3 style="color:pink;">Welcome to Central Florida</h3>  
+
+  
+
+<p style="color: #4E312D;" >Welcome to Central Florida! Ever wanted to explore cool beaches and surf like a proffesional and want clear beaches? Welcome to Clearwater. Clearwater is an amazing city mainly known for its amazing beaches and downtown walks one the most popular beaches are Clearwater Beach it is known for its clear water and Lush sand this is definitely a family-friendly place to go with everyone. One of the most family time places to go to is Pier 60. It has amazing restaurants with clothing, shops, parks and many more downtown shops to check to it has many kid activities too. These are the many perks of Clearwater Beach.  </p>  
+
+ <p style="color: #4E312D;">Orlando, Florida, widely celebrated as “Theme Park Capital of the World,” is the county seat of Orange County and stands as the state’s most populous city. Orlando has many places to visit including the famous Walt Disney World and the Universal Resort. After that, Orlando  </p> 
+
+ 
+
+  
+
+  <!-- Leaflet --> 
+
+  <link rel="stylesheet" 
+
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"> 
+
+  
+
+  <style> 
+
+    body { 
+
+      margin: 0; 
+
+      font-family: Arial, sans-serif; 
+
+      background: #f5f3ed; 
+
+    } 
+
+  
+
+    h1 { 
+
+      text-align: center; 
+
+      color: #294d43; 
+
+      padding: 15px; 
+
+    } 
+
+  
+
+    #map { 
+
+      height: 80vh; 
+
+      width: 92%; 
+
+      margin: auto; 
+
+      border-radius: 15px; 
+
+      border: 3px solid #294d43; 
+
+    } 
+
+  
+
+    .city-popup { 
+
+      width: 200px; 
+
+      text-align: center; 
+
+    } 
+
+  
+
+    .city-popup h2 { 
+
+      color: #294d43; 
+
+      margin-bottom: 8px; 
+
+    } 
+
+  
+
+    .city-popup p { 
+
+      font-size: 14px; 
+
+      line-height: 1.5; 
+
+    } 
+
+  
+
+    .city-dot { 
+
+      background: #d77e70; 
+
+      border: 3px solid white; 
+
+      border-radius: 50%; 
+
+      box-shadow: 0 1px 6px #555; 
+
+    } 
+
+  </style> 
+
+</head> 
+
+  
+
+<body> 
+
+  
+
+  <h1>Explore Central Florida!</h1> 
+
+  
+
+  <div id="map"></div> 
+
+  
+
+  <!-- Leaflet JavaScript --> 
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> 
+
+  
+
+  <script> 
+
+  
+
+    // Create map 
+
+    const map = L.map('map').setView([28.1, -81.8], 8); 
+
+  
+
+    // Esri map background 
+
+    L.tileLayer( 
+
+      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', 
+
+      { 
+
+        attribution: 'Tiles &copy; Esri', 
+
+        maxZoom: 19 
+
+      } 
+
+    ).addTo(map); 
+
+  
+
+  
+
+    // City information 
+
+    const cities = [ 
+
+  
+
+      { 
+
+        name: "Tampa", 
+
+        coords: [27.9506, -82.4572], 
+
+        description: "A lively Gulf Coast city known for its waterfront, historic Ybor City, and Busch Gardens." 
+
+      }, 
+
+  
+
+      { 
+
+        name: "Orlando", 
+
+        coords: [28.5383, -81.3792], 
+
+        description: "A popular tourist destination famous for Walt Disney World, Universal Orlando, and other attractions." 
+
+      }, 
+
+  
+
+      { 
+
+        name: "Clearwater", 
+
+        coords: [27.9659, -82.8001], 
+
+        description: "A coastal city famous for its beautiful beaches, clear water, and waterfront attractions." 
+
+      }, 
+
+  
+
+      { 
+
+        name: "Lakeland", 
+
+        coords: [28.0395, -81.9498], 
+
+        description: "A city known for its many lakes, historic buildings, and beautiful parks." 
+
+      }, 
+
+  
+
+      { 
+
+        name: "St. Petersburg", 
+
+        coords: [27.7676, -82.6403], 
+
+        description: "A sunny waterfront city known for its arts scene, parks, and Salvador Dalí Museum." 
+
+      } 
+
+  
+
+    ]; 
+
+  
+
+  
+
+    // Add city markers 
+
+    cities.forEach(city => { 
+
+  
+
+      const marker = L.marker(city.coords, { 
+
+  
+
+        icon: L.divIcon({ 
+
+          className: '', 
+
+          html: '<div class="city-dot" style="width:15px;height:15px;"></div>', 
+
+          iconSize: [21, 21], 
+
+          iconAnchor: [10, 10] 
+
+        }) 
+
+  
+
+      }).addTo(map); 
+
+  
+
+  
+
+      // Text-only popup 
+
+      const popupContent = ` 
+
+        <div class="city-popup"> 
+
+          <h2>${city.name}</h2> 
+
+          <p>${city.description}</p> 
+
+        </div> 
+
+      `; 
+
+  
+
+      marker.bindPopup(popupContent); 
+
+  
+
+  
+
+      // Show summary on hover 
+
+      marker.on('mouseover', function() { 
+
+        this.openPopup(); 
+
+      }); 
+
+  
+
+      // Close summary when mouse leaves 
+
+      marker.on('mouseout', function() { 
+
+        this.closePopup(); 
+
+      }); 
+
+  
+
+    }); 
+
+  
+
+  </script> 
+
+  
+
+</body> 
+
+</html>  <!DOCTYPE html> 
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Central Florida Navbar</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f3ed;
+    }
+
+    /* Navigation bar */
+    .navbar {
+      background-color: #294d43;
+      padding: 16px 35px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Website title */
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    /* Navigation links */
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #d9b89c;
+    }
+
+    /* Mobile layout */
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .nav-links {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+
+    <a href="index.html" class="logo">
+      Central Florida
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="map.html">Map</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="cities.html">Cities</a></li>
+    </ul>
+
+  </nav>
+
+
+
+<html lang="en"> 
+
+<head> 
+
+  <meta charset="UTF-8"> 
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+  <title>Explore Central Florida</title> 
+
+<h1 style="color: lightblue;">Paradise in the Sun</h1>   
+
+ <h3 style="color:pink;">Welcome to Central Florida</h3>  
+
+  
+
+<p style="color: #4E312D;" >Welcome to Central Florida! Ever wanted to explore cool beaches and surf like a proffesional and want clear beaches? Welcome to Clearwater. Clearwater is an amazing city mainly known for its amazing beaches and downtown walks one the most popular beaches are Clearwater Beach it is known for its clear water and Lush sand this is definitely a family-friendly place to go with everyone. One of the most family time places to go to is Pier 60. It has amazing restaurants with clothing, shops, parks and many more downtown shops to check to it has many kid activities too. These are the many perks of Clearwater Beach.  </p>  
+
+ <p style="color: #4E312D;">Orlando, Florida, widely celebrated as “Theme Park Capital of the World,” is the county seat of Orange County and stands as the state’s most populous city. Orlando has many places to visit including the famous Walt Disney World and the Universal Resort. After that, Orlando  </p> 
+
+ 
+
+  
+
+  <!-- Leaflet --> 
+
+  <link rel="stylesheet" 
+
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"> 
+
+  
+
+  <style> 
+
+    body { 
+
+      margin: 0; 
+
+      font-family: Arial, sans-serif; 
+
+      background: #f5f3ed; 
+
+    } 
+
+  
+
+    h1 { 
+
+      text-align: center; 
+
+      color: #294d43; 
+
+      padding: 15px; 
+
+    } 
+
+  
+
+    #map { 
+
+      height: 80vh; 
+
+      width: 92%; 
+
+      margin: auto; 
+
+      border-radius: 15px; 
+
+      border: 3px solid #294d43; 
+
+    } 
+
+  
+
+    .city-popup { 
+
+      width: 200px; 
+
+      text-align: center; 
+
+    } 
+
+  
+
+    .city-popup h2 { 
+
+      color: #294d43; 
+
+      margin-bottom: 8px; 
+
+    } 
+
+  
+
+    .city-popup p { 
+
+      font-size: 14px; 
+
+      line-height: 1.5; 
+
+    } 
+
+  
+
+    .city-dot { 
+
+      background: #d77e70; 
+
+      border: 3px solid white; 
+
+      border-radius: 50%; 
+
+      box-shadow: 0 1px 6px #555; 
+
+    } 
+
+  </style> 
+
+</head> 
+
+  
+
+<body> 
+
+  
+
+  <h1>Explore Central Florida!</h1> 
+
+  
+
+  <div id="map"></div> 
+
+  
+
+  <!-- Leaflet JavaScript --> 
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> 
+
+  
+
+  <script> 
+
+  
+
+    // Create map 
+
+    const map = L.map('map').setView([28.1, -81.8], 8); 
+
+  
+
+    // Esri map background 
+
+    L.tileLayer( 
+
+      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', 
+
+      { 
+
+        attribution: 'Tiles &copy; Esri', 
+
+        maxZoom: 19 
+
+      } 
+
+    ).addTo(map); 
+
+  
+
+  
+
+    // City information 
+
+    const cities = [ 
+
+  
+
+      { 
+
+        name: "Tampa", 
+
+        coords: [27.9506, -82.4572], 
+
+        description: "A lively Gulf Coast city known for its waterfront, historic Ybor City, and Busch Gardens." 
+
+      }, 
+
+  
+
+      { 
+
+        name: "Orlando", 
+
+        coords: [28.5383, -81.3792], 
+
+        description: "A popular tourist destination famous for Walt Disney World, Universal Orlando, and other attractions." 
+
+      }, 
+
+  
+
+      { 
+
+        name: "Clearwater", 
+
+        coords: [27.9659, -82.8001], 
+
+        description: "A coastal city famous for its beautiful beaches, clear water, and waterfront attractions." 
+
+      }, 
+
+  
+
+      { 
+
+        name: "Lakeland", 
+
+        coords: [28.0395, -81.9498], 
+
+        description: "A city known for its many lakes, historic buildings, and beautiful parks." 
+
+      }, 
+
+  
+
+      { 
+
+        name: "St. Petersburg", 
+
+        coords: [27.7676, -82.6403], 
+
+        description: "A sunny waterfront city known for its arts scene, parks, and Salvador Dalí Museum." 
+
+      } 
+
+  
+
+    ]; 
+
+  
+
+  
+
+    // Add city markers 
+
+    cities.forEach(city => { 
+
+  
+
+      const marker = L.marker(city.coords, { 
+
+  
+
+        icon: L.divIcon({ 
+
+          className: '', 
+
+          html: '<div class="city-dot" style="width:15px;height:15px;"></div>', 
+
+          iconSize: [21, 21], 
+
+          iconAnchor: [10, 10] 
+
+        }) 
+
+  
+
+      }).addTo(map); 
+
+  
+
+  
+
+      // Text-only popup 
+
+      const popupContent = ` 
+
+        <div class="city-popup"> 
+
+          <h2>${city.name}</h2> 
+
+          <p>${city.description}</p> 
+
+        </div> 
+
+      `; 
+
+  
+
+      marker.bindPopup(popupContent); 
+
+  
+
+  
+
+      // Show summary on hover 
+
+      marker.on('mouseover', function() { 
+
+        this.openPopup(); 
+
+      }); 
+
+  
+
+      // Close summary when mouse leaves 
+
+      marker.on('mouseout', function() { 
+
+        this.closePopup(); 
+
+      }); 
+
+  
+
+    }); 
+
+  
+
+  </script> 
+
+  
+
+</body> 
+
+</html>  
